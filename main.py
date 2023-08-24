@@ -26,16 +26,19 @@ def SrgbToLinear(val):
 
 g_bSpecOrDiff = 0
 
-albedo = cv2.imread('img/oggetto2_albedo.png').astype(float)/255
-specular = cv2.imread('img/oggetto2_speculare.png').astype(float)/255
+albedo = cv2.imread('img/acquisizione_3/materiale7/materiale7_001_albedo_040000.jpeg').astype(float) / 255
+specular = cv2.imread('img/acquisizione_3/materiale7/materiale7_001_speculare_000100.jpeg').astype(float) / 255
 linA = SrgbToLinear(albedo)
 linB = SrgbToLinear(specular)
 linSpec = specular - albedo
 linDiff = albedo * 2
 texDiff = LinearToSrgb(linDiff)
 texSpec = LinearToSrgb(linSpec)
-cv2.namedWindow("test1", cv2.WINDOW_NORMAL)
-cv2.imshow("test1", texSpec)
-cv2.namedWindow("test2", cv2.WINDOW_NORMAL)
-cv2.imshow("test2", texDiff)
+# cv2.namedWindow("test1", cv2.WINDOW_NORMAL)
+# cv2.imshow("test1", texSpec)
+cv2.imwrite('img/acquisizione_3/materiale7/materiale7_001_spec.jpeg', 255 * texSpec)
+
+# cv2.namedWindow("test2", cv2.WINDOW_NORMAL)
+# cv2.imshow("test2", texDiff)
+cv2.imwrite('img/acquisizione_3/materiale7/materiale7_001_diff.jpeg', 255 * texDiff)
 cv2.waitKey(0)
